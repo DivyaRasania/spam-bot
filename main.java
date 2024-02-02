@@ -1,35 +1,21 @@
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
-import java.util.Scanner;
 
-public class main {
+public class spamBot {
     public static void main(String[] args) throws AWTException, InterruptedException {
-
         Robot rb = new Robot();
-        Scanner sc = new Scanner(System.in);
         Clipboard clp = Toolkit.getDefaultToolkit().getSystemClipboard();
-        String copyTxt;
         StringSelection strselection;
-        int x;
-        int y = 1;
 
-        System.out.print("Enter your text: ");
-        copyTxt = sc.nextLine();
-        strselection = new StringSelection(copyTxt);
+        strselection = new StringSelection(args[0]);
         clp.setContents(strselection, null);
-
-        System.out.print("How many time do you want to spam this message?: ");
-        x = sc.nextInt();
 
         System.out.println("Open and get ready where you want to spam. The spamming will start in 5 seconds");
         Thread.sleep(5000);
 
-        while (y <= x) {
+        for (int i = 1; i <= Integer.parseInt(args[1]); i++) {
             Thread.sleep(500);
 
             rb.keyPress(KeyEvent.VK_CONTROL);
@@ -39,8 +25,6 @@ public class main {
 
             rb.keyPress(KeyEvent.VK_ENTER);
             rb.keyRelease(KeyEvent.VK_ENTER);
-
-            y++;
         }
     }
 }
